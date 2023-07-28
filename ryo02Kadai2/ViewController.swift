@@ -18,23 +18,26 @@ class ViewController: UIViewController {
     @IBAction private func calculationButton(_ sender: Any) {
         let inputValue1 = Float(value1.text ?? "") ?? 0
         let inputValue2 = Float(value2.text ?? "") ?? 0
+
+        let resultText: String
         
-        switch  segmentedControl.selectedSegmentIndex{
+        switch segmentedControl.selectedSegmentIndex {
         case 0:
-            resultLabel.text = String(inputValue1 + inputValue2)
+            resultText = String(inputValue1 + inputValue2)
         case 1:
-            resultLabel.text = String(inputValue1 - inputValue2)
+            resultText = String(inputValue1 - inputValue2)
         case 2:
-            resultLabel.text = String(inputValue1 * inputValue2)
+            resultText = String(inputValue1 * inputValue2)
         case 3:
-            if (inputValue2 == 0){
-                resultLabel.text = "割る数には0以外を入力してください"
+            if inputValue2 == 0 {
+                resultText = "割る数には0以外を入力してください"
             } else {
-                resultLabel.text = String(inputValue1 / inputValue2)
+                resultText = String(inputValue1 / inputValue2)
             }
-            resultLabel.text = String(inputValue1 / inputValue2)
         default:
-            break
+            fatalError("selectedSegmentIndex is invalid.")
         }
+
+        resultLabel.text = resultText
     }
 }
